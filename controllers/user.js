@@ -99,6 +99,21 @@ exports.deleteUser = (req, res) => {
         .catch(error => res.status(400).json({ message: 'Impossible de supprimer cet utilisateur', error }));
 }
 
+exports.deleteUserByAdmin = (req, res) => {
+    User.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(() => res.status(200).json({
+            message: 'Profil du user supprimé !'
+        }))
+        .catch(error => res.status(403).json({
+            error
+        }))
+    console.log(User.destroy)
+}
+
 // Afficher tous les utilisateurs sauf l'admin
 exports.getAllUsersByAdmin = (req, res) => {
     const userId = req.params.id;

@@ -29,7 +29,7 @@ exports.authAdmin = (req, res, next) => {
         const userId = decodedToken.userId;
         
         // Si l'id existe mais qu'il est différent de celui récupéré dans le token
-        if (userId !== 3) {
+        if (!userId.isAdmin) {
             throw 'User ID non valable !'
         } else {
             next();
